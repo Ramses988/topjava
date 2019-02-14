@@ -6,10 +6,20 @@
 
     <display-name>Topjava</display-name>
 
+    <filter>
+        <filter-name>FilterPage</filter-name>
+        <filter-class>ru.javawebinar.topjava.web.FilterPage</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>FilterPage</filter-name>
+        <servlet-name>mealServlet</servlet-name>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>userServlet</servlet-name>
         <servlet-class>ru.javawebinar.topjava.web.UserServlet</servlet-class>
-        <load-on-startup>0</load-on-startup>
+        <load-on-startup>-1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
@@ -20,6 +30,7 @@
     <servlet>
         <servlet-name>mealServlet</servlet-name>
         <servlet-class>ru.javawebinar.topjava.web.MealServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
     </servlet>
 
     <servlet-mapping>
