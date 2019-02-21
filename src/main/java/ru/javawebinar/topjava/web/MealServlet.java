@@ -43,21 +43,33 @@ public class MealServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        String id = request.getParameter("id");
 
-        Meal meal = new Meal(id.isEmpty() ? null : Integer.valueOf(id),
-                LocalDateTime.parse(request.getParameter("dateTime")),
-                request.getParameter("description"),
-                Integer.parseInt(request.getParameter("calories")),
-                SecurityUtil.authUserId());
+        String startDate = request.getParameter("startDate");
+        String endDate = request.getParameter("endDate");
+        String startTime = request.getParameter("startTime");
+        String endTime = request.getParameter("endTime");
 
-        log.info(meal.isNew() ? "Create {}" : "Update {}", meal);
-        if (meal.isNew())
-            controller.create(meal);
-        else
-            controller.update(meal);
+        if ((startDate != null && endDate != null) || (startTime != null && endTime != null)) {
+            request.setAttribute("meals", controller.getAllFilter(startDate, endDate, startTime, endTime));
+            request.getRequestDispatcher("/meals.jsp").forward(request, response);
+        }
+        else {
+            String id = request.getParameter("id");
 
-        response.sendRedirect("meals");
+            Meal meal = new Meal(id.isEmpty() ? null : Integer.valueOf(id),
+                    LocalDateTime.parse(request.getParameter("dateTime")),
+                    request.getParameter("description"),
+                    Integer.parseInt(request.getParameter("calories")),
+                    SecurityUtil.authUserId());
+
+            log.info(meal.isNew() ? "Create {}" : "Update {}", meal);
+            if (meal.isNew())
+                controller.create(meal);
+            else
+                controller.update(meal);
+
+            response.sendRedirect("meals");
+        }
     }
 
     @Override
