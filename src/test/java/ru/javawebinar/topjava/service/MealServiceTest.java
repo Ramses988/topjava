@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.service;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.bridge.SLF4JBridgeHandler;
@@ -32,6 +33,9 @@ public class MealServiceTest {
 
     @Autowired
     private MealService service;
+
+    @Rule
+    public ServicesRules services = new ServicesRules();
 
     @Test
     public void delete() throws Exception {
