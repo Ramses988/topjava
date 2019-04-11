@@ -25,11 +25,29 @@ public class MealRestControllerTest extends AbstractControllerTest {
 
     @Test
     void testGetBetween() throws Exception {
-        mockMvc.perform(post("/rest/meals/filter?start=2015-05-31T10:00:00&end=2015-05-31T21:00:00"))
+        mockMvc.perform(post("/rest/meals/filter?sDate=2015-05-31&sTime=10:00:00&eDate=2015-05-31&eTime=15:00:00"))
+//                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(contentJsonWithOutExcess(MealsUtil.getWithExcess(List.of(MEAL5, MEAL4), 2000)));
+    }
+
+    @Test
+    void testGetBetweenWithOutTime() throws Exception {
+        mockMvc.perform(post("/rest/meals/filter?sDate=2015-05-31&eDate=2015-05-31"))
 //                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(contentJson(MealsUtil.getWithExcess(List.of(MEAL6, MEAL5, MEAL4), 2000)));
+    }
+
+    @Test
+    void testGetBetweenWithOutDate() throws Exception {
+        mockMvc.perform(post("/rest/meals/filter?sTime=10:00:00&eTime=15:00:00"))
+//                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(contentJsonWithOutExcess(MealsUtil.getWithExcess(List.of(MEAL5, MEAL4, MEAL2, MEAL1), 2000)));
     }
 
     @Test

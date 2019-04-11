@@ -53,8 +53,16 @@ public class MealTestData {
         assertThat(actual).isEqualTo(expected);
     }
 
+    public static void assertMatchMealToWithOutExcess(Iterable<MealTo> actual, Iterable<MealTo> expected) {
+        assertThat(actual).usingElementComparatorIgnoringFields("excess").isEqualTo(expected);
+    }
+
     public static ResultMatcher contentJson(Iterable<MealTo> expected) {
         return result -> assertMatchMealTo(readListFromJsonMvcResult(result, MealTo.class), expected);
+    }
+
+    public static ResultMatcher contentJsonWithOutExcess(Iterable<MealTo> expected) {
+        return result -> assertMatchMealToWithOutExcess(readListFromJsonMvcResult(result, MealTo.class), expected);
     }
 
     public static ResultMatcher contentJson(Meal expected) {

@@ -34,9 +34,14 @@ public class MealRestController extends AbstractMealController {
     }
 
     @PostMapping("/filter")
-    public List<MealTo> getBetweenTwoParameters(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") LocalDateTime start,
-                                                @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") LocalDateTime end) {
-        return super.getBetween(start.toLocalDate(), start.toLocalTime(), end.toLocalDate(), end.toLocalTime());
+    public List<MealTo> getBetweenTwoParameters(@RequestParam(required = false) String sDate, @RequestParam(required = false) String sTime,
+                                                @RequestParam(required = false) String eDate, @RequestParam(required = false) String eTime) {
+
+        LocalDate startDate = parseLocalDate(sDate);
+        LocalDate endDate = parseLocalDate(eDate);
+        LocalTime startTime = parseLocalTime(sTime);
+        LocalTime endTime = parseLocalTime(eTime);
+        return super.getBetween(startDate, startTime, endDate, endTime);
     }
 
     @Override
