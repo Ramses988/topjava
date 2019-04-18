@@ -20,6 +20,6 @@ public class MealUIControllerTest extends AbstractControllerTest {
         .param("dateTime", "2019-04-16T12:00")
         .param("description", "Завтрак")
         .param("calories", "1000"))
-                .andExpect(status().isNoContent());
+        .andExpect(status().isNoContent());
     }
 }

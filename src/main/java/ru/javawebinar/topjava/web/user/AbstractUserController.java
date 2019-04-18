@@ -22,6 +22,10 @@ public abstract class AbstractUserController {
         return service.getAll();
     }
 
+    public void changeState(int id, boolean state) {
+        service.changeState(id, state);
+    }
+
     public User get(int id) {
         log.info("get {}", id);
         return service.get(id);

@@ -21,6 +21,18 @@ class AdminRestControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = AdminRestController.REST_URL + '/';
 
+
+    @Test
+    void testChangeState() throws Exception {
+        USER.setEnabled(false);
+        mockMvc.perform(post("/ajax/admin/users/enable/")
+        .param("id", "100000")
+        .param("state", "false"))
+        .andExpect(status().isNoContent());
+
+        assertMatch(userService.get(USER_ID), USER);
+    }
+
     @Test
     void testGet() throws Exception {
         mockMvc.perform(get(REST_URL + ADMIN_ID))

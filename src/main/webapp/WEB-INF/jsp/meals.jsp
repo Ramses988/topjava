@@ -15,25 +15,35 @@
 <section>
     <h3><spring:message code="meal.title"/></h3>
 
-    <form method="post" action="meals/filter">
-        <dl>
-            <dt><spring:message code="meal.startDate"/>:</dt>
-            <dd><input type="date" name="startDate" value="${param.startDate}"></dd>
-        </dl>
-        <dl>
-            <dt><spring:message code="meal.endDate"/>:</dt>
-            <dd><input type="date" name="endDate" value="${param.endDate}"></dd>
-        </dl>
-        <dl>
-            <dt><spring:message code="meal.startTime"/>:</dt>
-            <dd><input type="time" name="startTime" value="${param.startTime}"></dd>
-        </dl>
-        <dl>
-            <dt><spring:message code="meal.endTime"/>:</dt>
-            <dd><input type="time" name="endTime" value="${param.endTime}"></dd>
-        </dl>
-        <button type="submit"><spring:message code="meal.filter"/></button>
-    </form>
+    <div class="container">
+        <form id="filter-meals">
+        <div class="row">
+            <div class="col-sm">
+                <dl>
+                    <dt><spring:message code="meal.startDate"/>:</dt>
+                    <dd><input type="date" name="startDate" value="${param.startDate}"></dd>
+                </dl>
+                <dl>
+                    <dt><spring:message code="meal.endDate"/>:</dt>
+                    <dd><input type="date" name="endDate" value="${param.endDate}"></dd>
+                </dl>
+            </div>
+            <div class="col-sm">
+                <dl>
+                    <dt><spring:message code="meal.startTime"/>:</dt>
+                    <dd><input type="time" name="startTime" value="${param.startTime}"></dd>
+                </dl>
+                <dl>
+                    <dt><spring:message code="meal.endTime"/>:</dt>
+                    <dd><input type="time" name="endTime" value="${param.endTime}"></dd>
+                </dl>
+            </div>
+        </div>
+        <button type="button" class="btn btn-info" onclick="filter()"><spring:message code="meal.filter"/></button>
+        <button type="button" class="btn btn-info" onclick="clearFilter()"><spring:message code="meal.reset"/></button>
+        </form>
+    </div>
+
     <hr>
     <%--<a href="meals/create"><spring:message code="meal.add"/></a>--%>
     <button class="btn btn-primary" onclick="add()">

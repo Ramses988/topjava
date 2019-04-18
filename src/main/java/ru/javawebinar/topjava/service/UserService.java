@@ -20,5 +20,7 @@ public interface UserService {
 
     List<User> getAll();
 
+    void changeState(int id, boolean state);
+
     User getWithMeals(int id);
 }
