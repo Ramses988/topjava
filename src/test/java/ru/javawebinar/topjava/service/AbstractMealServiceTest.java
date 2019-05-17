@@ -4,10 +4,13 @@ import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.javawebinar.topjava.model.Meal;
+import ru.javawebinar.topjava.to.MealTo;
+import ru.javawebinar.topjava.util.MealsUtil;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import javax.validation.ConstraintViolationException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
 
 import static java.time.LocalDateTime.of;
@@ -60,6 +63,12 @@ public abstract class AbstractMealServiceTest extends AbstractServiceTest {
         Meal updated = getUpdated();
         service.update(updated, USER_ID);
         assertMatch(service.get(MEAL1_ID, USER_ID), updated);
+    }
+
+    @Test
+    void updateTo() throws Exception {
+        service.update(MealTo1, USER_ID);
+        assertMatch(service.get(100007, USER_ID), MealsUtil.createNewFromTo(MealTo1));
     }
 
     @Test

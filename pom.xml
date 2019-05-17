@@ -205,6 +205,13 @@
             <version>${ehcache.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.florianlopes</groupId>
+            <artifactId>spring-mvc-test-utils</artifactId>
+            <version>1.0.1</version>
+            <scope>test</scope>
+        </dependency>
+
         <!--https://medium.com/criciumadev/its-time-migrating-to-java-11-5eb3868354f9-->
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
